@@ -11,9 +11,17 @@ import java.nio.file.Paths;
  *
  */
 public class DocumentFactory {
-    public static IDocument getDocument(final String fileName) throws IOException {
+    public static IDocument getDocument(final String fileName) {
         IDocument doc = null;
-        String fileType = Files.probeContentType(Paths.get(fileName)).toLowerCase();
+        String fileType = "";
+        
+        try {
+            fileType = Files.probeContentType(Paths.get(fileName));
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
         switch (fileType) {
         case "application/pdf":

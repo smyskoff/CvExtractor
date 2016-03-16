@@ -1,5 +1,5 @@
 import java.io.IOException;
 
 public interface IDocument {
-    public String getText() throws IOException;
+    public String getText();
 }

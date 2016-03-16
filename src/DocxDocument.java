@@ -19,7 +19,7 @@ public class DocxDocument implements IDocument {
      * @see IDocument#getText()
      */
     @Override
-    public String getText() throws IOException {
+    public String getText() {
         // TODO Auto-generated method stub
         return null;
     }

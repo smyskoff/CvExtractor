@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.pdfbox.cos.COSDocument;
@@ -28,20 +29,26 @@ public class PdfDocument implements IDocument {
      * @see IDocument#getText()
      */
     @Override
-    public String getText() throws IOException {
-        RandomAccessFile rar = new RandomAccessFile(new File(fileName), "r");
-        PDFParser parser = new PDFParser(rar);
-        
-        parser.parse();
-        
-        COSDocument cosDoc = parser.getDocument();
-        PDFTextStripper pdfStripper = new PDFTextStripper();
-        PDDocument pdDoc = new PDDocument(cosDoc);
-        
-        pdfStripper.setStartPage(1);
-        pdfStripper.setEndPage(pdDoc.getNumberOfPages());
+    public String getText() {
+        try {
+            RandomAccessFile rar = new RandomAccessFile(new File(fileName), "r");
+            PDFParser parser = new PDFParser(rar);
 
-        return pdfStripper.getText(pdDoc);
+            parser.parse();
+
+            COSDocument cosDoc = parser.getDocument();
+            PDFTextStripper pdfStripper = new PDFTextStripper();
+            PDDocument pdDoc = new PDDocument(cosDoc);
+            
+            pdfStripper.setStartPage(1);
+            pdfStripper.setEndPage(pdDoc.getNumberOfPages());
+
+            return pdfStripper.getText(pdDoc);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     /**
