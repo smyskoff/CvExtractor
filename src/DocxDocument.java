@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /**
  * 
  */
@@ -9,10 +7,8 @@ import java.io.IOException;
  *
  */
 public class DocxDocument implements IDocument {
-    private final String fileName;
-    
     public DocxDocument(String fileName) {
-        this.fileName = fileName;
+
     }
 
     /* (non-Javadoc)
